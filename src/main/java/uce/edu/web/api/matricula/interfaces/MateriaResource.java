@@ -20,49 +20,49 @@ public class MateriaResource {
     private MateriaService materiaService;
 
     @GET
-    @Path("/todos")
+    @Path("")
     public List<Materia> listarTodos() {
         return this.materiaService.listarTodos();
     }
 
     @GET
-    @Path("consultarPorId/{id}") // para enviar variables se hace cob {}
+    @Path("/{id}") // para enviar variables se hace cob {}
     public Materia consultarPorId(@PathParam("id") Integer iden) {
         return this.materiaService.consultarPorId(iden);
     }
 
     @POST
-    @Path("/crear")
+    @Path("")
     public void guardarMateria(Materia materia) {
         this.materiaService.crearMateria(materia);
     }
 
     @PUT
-    @Path("/actualizar/{id}")
+    @Path("/{id}")
     public void actualizarMateria(@PathParam("id") Integer id, Materia materia) {
         this.materiaService.actualizar(id, materia);
     }
 
     @PATCH
-    @Path("/actualizarParcial/{id}")
+    @Path("/{id}")
     public void actualizarParcialMateria(@PathParam("id") Integer id, Materia materia) {
         this.materiaService.actualizarParcial(id, materia);
     }
 
     @DELETE
-    @Path("/borrar/{id}")
+    @Path("/{id}")
     public void borrarMateria(@PathParam("id") Integer id) {
         this.materiaService.eliminar(id);
     }
 
     @GET
-    @Path("creditos/{min}/{max}")
+    @Path("/{min}/{max}")
     public List<Materia> buscar(@PathParam("min") Integer min, @PathParam("max") Integer max) {
         return materiaService.buscarMateriaPorRango(min, max);
     }
 
     @PUT
-    @Path("/desactivar/{creditos}")
+    @Path("/{creditos}")
     public String desactivar(@PathParam("creditos") Integer creditos) {
         int total = materiaService.desactivarMaterias(creditos);
         return "Materias desactivadas: " + total;
