@@ -11,9 +11,11 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import uce.edu.web.api.matricula.application.EstudianteService;
 import uce.edu.web.api.matricula.domain.Estudiante;
+import jakarta.ws.rs.Produces;
 
 @Path("/estudiantes")
 public class EstudianteResource {
@@ -22,23 +24,28 @@ public class EstudianteResource {
 
     @GET
     @Path("")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Estudiante> listarTodos() {
         System.out.println("Listar Todos XXXXXXXXXXXXXXX");
         return this.estudianteService.listarTodos();
-        
+
     }
+
     @GET
     @Path("/provincia/genero") // Eliminamos las llaves de aquí
+    @Produces(MediaType.APPLICATION_XML)
     public List<Estudiante> buscarPorProvincia(
             @QueryParam("provincia") String provincia,
             @QueryParam("genero") String genero) {
-        
+
         System.out.println("Listar Todos Provincia y Genero XXXXXXXXXXXXXXX");
-                
+
         return this.estudianteService.buscarPorProvincia(provincia, genero);
     }
+
     @GET
     @Path("/{id}") // para enviar variables se hace cob {}
+    @Produces(MediaType.APPLICATION_XML)
     public Estudiante consultarPorId(@PathParam("id") Integer iden) {
         return this.estudianteService.consultarPorId(iden);
     }
@@ -69,5 +76,4 @@ public class EstudianteResource {
         this.estudianteService.eliminar(id);
     }
 
-    
 }
